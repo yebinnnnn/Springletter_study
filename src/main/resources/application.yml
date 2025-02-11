@@ -74,6 +74,10 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.H2Dialect
+  openai:
+    model: gpt-3.5-turbo
+    secret-key: {open.api.keys}
+    url: https://api.openai.com/v1/chat/completions
   sql:
     init:
       mode: always # 애플리케이션 시작 시 스크립트 초기화 (기본값: embedded)

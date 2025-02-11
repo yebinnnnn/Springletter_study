@@ -37,3 +37,5 @@ out/
 .vscode/
 
 application-SECRET-KEY.properties
+application.properties
+application.yml
