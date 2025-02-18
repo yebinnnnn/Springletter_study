@@ -3,6 +3,7 @@ package com.trashhcan.letter.controller;
 
 import com.trashhcan.letter.dto.request.GPTrequestDto;
 import com.trashhcan.letter.dto.response.GPTresponseDto;
+import com.trashhcan.letter.service.GptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -20,18 +21,26 @@ public class LetterGptController {
     @Value("${openai.api.url}")
     private String apiURL;
 
-    @Autowired
-    private RestTemplate template;
+    private final GptService gptService;
+
+    public LetterGptController(GptService gptService) {
+        this.gptService = gptService;
+    }
 
     @GetMapping("/chat")
     public String chat(){
-        String prompt="'쓸모 없는'으로 시작하는 가까운 친구에게 보낼만한 편지주제 하나만 반환해줘." +
-                "예시는 다음과 같아. '쓸모없는 연말선물 추천','쓸모없는 인테리어 용품 추천' 등등이야."
-                +"되도록이면 쓸모없는 다음에 오는 명사에는 취미같은 추상적인 명사가 아니었으면 좋겠고 제품같은 명사였으면 좋겠어.";
-        GPTrequestDto request = new GPTrequestDto(model, prompt);
-        GPTresponseDto chatGPTResponse =  template.postForObject(apiURL, request, GPTresponseDto.class);
-        return Objects.requireNonNull(chatGPTResponse).getChoices().get(0).getMessage().getContent();
+        return gptService.requestGPTWithTopic();
     }
+
+//    @GetMapping("/chat")
+//    public String chat(){
+//        String prompt="'쓸모 없는'으로 시작하는 가까운 친구에게 보낼만한 편지주제 하나만 반환해줘." +
+//                "예시는 다음과 같아. '쓸모없는 연말선물 추천','쓸모없는 인테리어 용품 추천' 등등이야."
+//                +"되도록이면 쓸모없는 다음에 오는 명사에는 취미같은 추상적인 명사가 아니었으면 좋겠고 제품같은 명사였으면 좋겠어.";
+//        GPTrequestDto request = new GPTrequestDto(model, prompt);
+//        GPTresponseDto chatGPTResponse =  template.postForObject(apiURL, request, GPTresponseDto.class);
+//        return Objects.requireNonNull(chatGPTResponse).getChoices().get(0).getMessage().getContent();
+//    }
 
 //    @PostMapping("/chatbot")
 //    public ResponseEntity<GPTresponseDto> chatBot(@RequestBody GPTpromptDto request){
