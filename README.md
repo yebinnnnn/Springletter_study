@@ -14,6 +14,6 @@
 
 - 서비스 종료후에 개선을 위해 남기는 기록입니다.
 
-## 게임 설명
+## 서비스 이미지
 |![image](https://github.com/user-attachments/assets/e705aa69-c255-4a7a-bbc9-8ecf8d4a6c5d)|![image](https://github.com/user-attachments/assets/f6f1fc6d-ca28-4c9a-9405-cb9c179d6974)|
 |:---:|:---:|
